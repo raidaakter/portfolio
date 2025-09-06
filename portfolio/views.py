@@ -7,6 +7,7 @@ from portfolio.forms import (
     ExperienceForm,
     EducationForm,
 )
+from portfolio.models import Language, Project, Skill, Experience, Education
 
 
 def signup_view(request):
@@ -26,7 +27,8 @@ def logout_view(request):
 
 
 def projects_view(request):
-    return render(request, "projects.html")
+    projects = Project.objects.all()
+    return render(request, "projects.html", context={"projects": projects})
 
 
 def contact_view(request):
@@ -39,4 +41,15 @@ def contact_view(request):
 
 
 def resume_view(request):
-    return render(request, "resume.html")
+    experiences = Experience.objects.all()
+    educations = Education.objects.all()
+    skills = Skill.objects.all()
+    languages = Language.objects.all()
+
+    context = {
+        "experiences": experiences,
+        "educations": educations,
+        "skills": skills,
+        "languages": languages,
+    }
+    return render(request, "resume.html", context)

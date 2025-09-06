@@ -19,6 +19,14 @@ class Skill(models.Model):
         return self.name
 
 
+class Language(models.Model):
+    name = models.CharField(max_length=100)
+    proficiency = models.IntegerField(help_text="Proficiency level from 1 to 100")
+
+    def __str__(self):
+        return self.name
+
+
 class Experience(models.Model):
     job_title = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
